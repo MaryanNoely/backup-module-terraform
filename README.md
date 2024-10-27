@@ -1,2 +1,3 @@
 # backup-module-terraform
 A module that configures a backup policy, with cross-region and cross-account copies.
+This excercise is part of a challenge.
