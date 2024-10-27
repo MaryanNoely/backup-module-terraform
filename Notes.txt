@@ -1,0 +1,63 @@
+Required permissions (https://docs.aws.amazon.com/aws-backup/latest/devguide/create-a-vault.html)
+
+You must have the following permissions to create a backup vault using AWS Backup.
+
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:RetireGrant",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
+      ],
+      "Resource": "arn:aws:kms:region:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "backup:CreateBackupVault"
+      ],
+      "Resource": "arn:aws:backup:region:444455556666:backup-vault:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "backup-storage:MountCapsule"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
+
+-------------------------------------------------------------------
+Step 1: Opt in to use AWS Backup
+If this is your first time using the AWS Backup service, you must opt in to use AWS Backup and cross-account management features using the AWS Management Console or CLI.
+
+To opt in using AWS Management Console (recommended):
+Open the AWS Backup console in your management account and from the left navigation pane, choose Settings, and then choose Enable for Backup policies, Cross-account monitoring, and Cross-account backup.
+The status of the cross-account management settings would change to Enabled.
+Ensure that you have enabled your supported workloads in the Service opt-in
+You can refer to the existing AWS Backup blog on cross account, cross-Region backup for additional help with using the AWS Management Console for service opt-in.
+
+
+To opt in using AWS CLI or CloudShell:
+Open the configured AWS CLI or CloudShell to access your management account and run the following command.
+Note: You need to include your AWS Organizations Root OU ID in the first CLI command.
+
+    aws organizations enable-policy-type --root-id r-<INSERT-YOUR-ROOT-OU-ID>
+    --policy-type BACKUP_POLICY
+
+    aws organizations enable-aws-service-access --service-principal 
+    backup.amazonaws.com
+
+    aws backup update-global-settings --global-settings 
+    isCrossAccountBackupEnabled=true
+
+
+https://aws.amazon.com/es/blogs/storage/automate-centralized-backup-at-scale-across-aws-services-using-aws-backup/
