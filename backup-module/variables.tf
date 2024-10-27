@@ -3,21 +3,6 @@ variable "terraformVersion"{
     type = string
     default = "5.25.0"
 }
-# variable "awsPrimaryRegion"{
-#     description= "AWS Primary Region"
-#     type= string
-#     default="eu-central-1"
-# }
-# variable "awsSecondaryRegion"{
-#     description= "AWS Secondary Region"
-#     type= string
-#     default="eu-west-1"
-# }
-# variable "BackupAccount_assume_role"{
-#     description= "AWS Secondary Account assume role"
-#     type= string
-#     default="arn:aws:iam::BACKUP_ACCOUNT_ID:role/CrossAccountBackupRole"
-# }
 
 variable "secondary_region_vault_arn"{
     description= "ARN of the Backup Vault in the secondary account for cross-account backup copies"

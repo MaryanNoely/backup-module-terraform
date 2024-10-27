@@ -43,6 +43,3 @@ module backup-module {
   selection_tags = var.selection_tags
 
 }
-
-
-
